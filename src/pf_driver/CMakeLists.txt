@@ -14,9 +14,11 @@ find_package(tf2_ros REQUIRED)
 find_package(pf_interfaces REQUIRED)
 
 find_package(Boost REQUIRED COMPONENTS  thread system)
-find_package(jsoncpp REQUIRED)
+if(NOT TARGET JsonCpp::JsonCpp)
+  find_package(jsoncpp REQUIRED)
+  get_target_property(jsoncpp_INCLUDE_DIRS jsoncpp_lib INTERFACE_INCLUDE_DIRECTORIES)
+endif()
 find_package(yaml-cpp REQUIRED)
-get_target_property(jsoncpp_INCLUDE_DIRS jsoncpp_lib INTERFACE_INCLUDE_DIRECTORIES)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(CURLPP REQUIRED curlpp)
 
